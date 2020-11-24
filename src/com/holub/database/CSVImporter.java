@@ -31,6 +31,9 @@ import com.holub.tools.ArrayIterator;
 import java.io.*;
 import java.util.*;
 
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
 /***
  *	Pass this importer to a {@link Table} constructor (such
  *	as
@@ -102,4 +105,24 @@ public class CSVImporter implements Table.Importer
 	}
 
 	public void endTable() throws IOException {}
+	
+	public static class Test
+	{ 	public static void main( String[] args ) throws IOException
+		{	
+			Reader in = new FileReader( "name.csv" );
+			Table people = TableFactory.create( new CSVImporter(in) );
+			in.close();
+
+			javax.swing.JFrame frame = new javax.swing.JFrame();
+			frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+
+			JTableExporter tableBuilder = new JTableExporter();
+			people.export( tableBuilder );
+
+			frame.getContentPane().add(
+					new JScrollPane( tableBuilder.getJTable() ) );
+			frame.pack();
+			frame.setVisible( true );
+		}
+	}
 }
