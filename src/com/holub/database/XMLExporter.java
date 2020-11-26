@@ -43,11 +43,11 @@ public class XMLExporter implements Table.Exporter {
 			
 			out.write( "<"+columns[i].toString()+">" );
 			if( datum != null )	out.write( datum.toString() );
-			out.write( "<"+columns[i].toString()+"/>" );
+			out.write( "</"+columns[i].toString()+">" );
 			
-			if( ++i < width ) out.write("\t");
+			i++;
 		}
-		out.write( "<row/>" );
+		out.write( "</row>" );
 		out.write("\n");
 	}
 
@@ -56,7 +56,7 @@ public class XMLExporter implements Table.Exporter {
 	}
 	
 	public void endTable() throws IOException {
-		out.write("<"+tableName+"/>");
+		out.write("</"+tableName+">");
 	}
 	
 	public static class Test
