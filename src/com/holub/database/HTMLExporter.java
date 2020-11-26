@@ -3,47 +3,43 @@ package com.holub.database;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Iterator;
 
 public class HTMLExporter implements Table.Exporter {
 
-	private StringBuilder html= new StringBuilder();
+	private final Writer out;
 	private String tableName;
+	
+	public HTMLExporter( Writer out )
+	{	this.out = out;
+	}
 	
 	@Override
 	public void storeMetadata(String tableName, int width, int height, Iterator columnNames) throws IOException {	
 		this.tableName = tableName;
 		
-		html.append("<html><head><title>");
-		html.append(tableName);
-		html.append("</title></head><body><table>");
+		out.write("<html><head><title>");
+		out.write(tableName);
+		out.write("</title></head><body><table>");
 		storeRow(columnNames);
 	}
 
 	@Override
 	public void storeRow(Iterator data) throws IOException {
-		html.append("<tr>");
+		out.write("<tr>");
 		while( data.hasNext() ) {
-			html.append("<td>");
-			html.append(data.next().toString());
-			html.append("</td>");
+			out.write("<td>");
+			out.write(data.next().toString());
+			out.write("</td>");
 		}
-		html.append("</tr>");
-	}
-	
-	public String getHTML() throws IOException{
-		return html.toString();
+		out.write("</tr>");
 	}
 
 	public void startTable() throws IOException {/*nothing to do*/}
-	public void endTable()   throws IOException {/*nothing to do*/}
-
 	
-	public void BufferedWritter() throws IOException {
-		html.append("</table></body></html>");
-		BufferedWriter writer = new BufferedWriter(new FileWriter(tableName + ".html"));
-		writer.write(html.toString());
-		writer.close();
+	public void endTable() throws IOException {
+		out.write("</table></body></html>");
 	}
 	
 	public static class Test
@@ -56,11 +52,11 @@ public class HTMLExporter implements Table.Exporter {
 			people.insert( new String[]{ "Rip",		"VanWinkle" } );
 			people.insert( new String[]{ "Goldie",	"Locks" 	} );
 
-			HTMLExporter tableBuilder = new HTMLExporter();
+			BufferedWriter writer = new BufferedWriter(new FileWriter("test.html"));
+			HTMLExporter tableBuilder = new HTMLExporter(writer);
 			people.export( tableBuilder );
-			
-			tableBuilder.BufferedWritter();
-			
+			writer.close();
+						
 		}
 	}
 	
