@@ -42,22 +42,4 @@ public class HTMLExporter implements Table.Exporter {
 		out.write("</table></body></html>");
 	}
 	
-	public static class Test
-	{ 	public static void main( String[] args ) throws IOException
-		{	
-			Table people = TableFactory.create( "people",
-						   new String[]{ "First", "Last"		} );
-			people.insert( new String[]{ "Allen",	"Holub" 	} );
-			people.insert( new String[]{ "Ichabod",	"Crane" 	} );
-			people.insert( new String[]{ "Rip",		"VanWinkle" } );
-			people.insert( new String[]{ "Goldie",	"Locks" 	} );
-
-			BufferedWriter writer = new BufferedWriter(new FileWriter("test.html"));
-			HTMLExporter tableBuilder = new HTMLExporter(writer);
-			people.export( tableBuilder );
-			writer.close();
-						
-		}
-	}
-	
 }

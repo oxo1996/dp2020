@@ -117,31 +117,6 @@ public class XMLImporter implements Table.Importer {
 	}
 
 	@Override
-	public void endTable() throws IOException {		
-	}
-	
-	public static class Test
-	{ 	public static void main( String[] args ) throws IOException
-		{	
-			Reader in = new FileReader( "test.xml" );
-			
-			Table people = TableFactory.create( new XMLImporter(in) );
-			in.close();
-	
-//			javax.swing.JFrame frame = new javax.swing.JFrame();
-//			frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-	
-			BufferedWriter writer = new BufferedWriter(new FileWriter("test.html"));
-
-			HTMLExporter tableBuilder = new HTMLExporter(writer);
-			people.export( tableBuilder );
-	
-			writer.close();
-//			frame.getContentPane().add(
-//					new JScrollPane( tableBuilder.getJTable() ) );
-//			frame.pack();
-//			frame.setVisible( true );			
-		}
-	}
+	public void endTable() throws IOException {}
 
 }

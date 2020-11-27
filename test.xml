@@ -1,7 +1,1 @@
-<?xml version = "1.0"?>
-<people>
-<row><First>Allen</First><Last>Holub</Last></row>
-<row><First>Ichabod</First><Last>Crane</Last></row>
-<row><First>Rip</First><Last>VanWinkle</Last></row>
-<row><First>Goldie</First><Last>Locks</Last></row>
-</people>
+<html><head><title>people</title></head><body><table><tr><td>First</td><td>Last</td></tr><tr><td>Allen</td><td>Holub</td></tr><tr><td>Ichabod</td><td>Crane</td></tr><tr><td>Rip</td><td>VanWinkle</td></tr><tr><td>Goldie</td><td>Locks</td></tr></table></body></html>
