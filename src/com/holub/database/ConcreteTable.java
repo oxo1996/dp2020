@@ -442,6 +442,11 @@ import com.holub.tools.ArrayIterator;
 	/**
 	 * This version of select does a join
 	 */
+	
+	public String[] getColumns() {
+		return columnNames;
+	}
+	
 	public Table select(Selector where, String[] requestedColumns, // {=ConcreteTable.select.default}
 			Table[] otherTables) {
 		// If we're not doing a join, use the more efficient version
@@ -459,6 +464,22 @@ import com.holub.tools.ArrayIterator;
 
 		// Create places to hold the result of the join and to hold
 		// iterators for each table involved in the join.
+		
+		if (requestedColumns == null) {
+			
+			Set<String> set = new HashSet<String>(); 
+			List<String> temp;
+			
+			for (int i = 0; i < allTables.length; i++) {
+				temp=new ArrayList<String>(Arrays.asList(((ConcreteTable)(allTables[i])).getColumns()));
+		        set.addAll(temp);
+			}
+			
+			ArrayList<String> arr = new ArrayList<String>(set);
+			requestedColumns = new String[arr.size()];
+			int idx=0;
+			for(String t : arr) requestedColumns[idx++] = t;
+		}
 
 		Table resultTable = new ConcreteTable(null, requestedColumns);
 		Cursor[] envelope = new Cursor[allTables.length];
@@ -489,7 +510,7 @@ import com.holub.tools.ArrayIterator;
 	private static void selectFromCartesianProduct(int level, Selector where, String[] requestedColumns,
 			Table[] allTables, Cursor[] allIterators, Table resultTable) {
 		allIterators[level] = allTables[level].rows();
-
+		
 		while (allIterators[level].advance()) { // If we haven't reached the tips of the branches yet,
 												// go down one more level.
 
