@@ -465,21 +465,21 @@ import com.holub.tools.ArrayIterator;
 		// Create places to hold the result of the join and to hold
 		// iterators for each table involved in the join.
 		
-//		if (requestedColumns == null) {
-//			
-//			Set<String> set = new HashSet<String>(); 
-//			List<String> temp;
-//			
-//			for (int i = 0; i < allTables.length; i++) {
-//				temp=new ArrayList<String>(Arrays.asList(((ConcreteTable)(allTables[i])).getColumns()));
-//		        set.addAll(temp);
-//			}
-//			
-//			ArrayList<String> arr = new ArrayList<String>(set);
-//			requestedColumns = new String[arr.size()];
-//			int idx=0;
-//			for(String t : arr) requestedColumns[idx++] = t;
-//		}
+		if (requestedColumns == null) {
+			
+			Set<String> set = new HashSet<String>(); 
+			List<String> temp;
+			
+			for (int i = 0; i < allTables.length; i++) {
+				temp=new ArrayList<String>(Arrays.asList(((ConcreteTable)(allTables[i])).getColumns()));
+		        set.addAll(temp);
+			}
+			
+			ArrayList<String> arr = new ArrayList<String>(set);
+			requestedColumns = new String[arr.size()];
+			int idx=0;
+			for(String t : arr) requestedColumns[idx++] = t;
+		}
 
 		Table resultTable = new ConcreteTable(null, requestedColumns);
 		Cursor[] envelope = new Cursor[allTables.length];
