@@ -23,13 +23,13 @@ public class BuilderTest {
 //			people.insert( new String[]{ "Rip",		"VanWinkle" } );
 //			people.insert( new String[]{ "Goldie",	"Locks" 	} );
 			
-			Reader in = new FileReader( "name.csv" );
-			Table people = TableFactory.create( new CSVImporter(in) );
-			in.close();
-			
-//			Reader in = new FileReader( "test.xml" );
-//			Table people = TableFactory.create( new XMLImporter(in) );
+//			Reader in = new FileReader( "c:/dp2020/name.csv" );
+//			Table people = TableFactory.create( new CSVImporter(in) );
 //			in.close();
+			
+			Reader in = new FileReader( "c:/dp2020/test.xml" );
+			Table people = TableFactory.create( new XMLImporter(in) );
+			in.close();
 			
 			// ---importer---
 			// ---exporter---
@@ -42,17 +42,17 @@ public class BuilderTest {
 //			frame.pack();
 //			frame.setVisible( true );
 			
-//			BufferedWriter writer = new BufferedWriter(new FileWriter("tes.xml"));
-//			HTMLExporter tableBuilder = new HTMLExporter(writer);
-//			people.export( tableBuilder );
-//			writer.close();
-			
-			BufferedWriter writer = new BufferedWriter(new FileWriter("test.xml"));
-			CSVExporter tableBuilder = new CSVExporter(writer);
+			BufferedWriter writer = new BufferedWriter(new FileWriter("c:/dp2020/test2.html"));
+			HTMLExporter tableBuilder = new HTMLExporter(writer);
 			people.export( tableBuilder );
 			writer.close();
 			
-//			BufferedWriter writer = new BufferedWriter(new FileWriter("test.xml"));
+//			BufferedWriter writer = new BufferedWriter(new FileWriter("c:/dp2020/test.xml"));
+//			CSVExporter tableBuilder = new CSVExporter(writer);
+//			people.export( tableBuilder );
+//			writer.close();
+			
+//			BufferedWriter writer = new BufferedWriter(new FileWriter("c:/dp2020/test.xml"));
 //			XMLExporter tableBuilder = new XMLExporter(writer);
 //			people.export( tableBuilder );
 //			writer.close();
